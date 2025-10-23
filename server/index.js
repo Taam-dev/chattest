@@ -15,13 +15,11 @@ const io = socketIO(server, {
   }
 });
 
-// Lưu users online
 let onlineUsers = [];
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
-  // Khi user join
   socket.on('user-join', (username) => {
     const user = {
       id: socket.id,
@@ -29,14 +27,11 @@ io.on('connection', (socket) => {
     };
     onlineUsers.push(user);
     
-    // Gửi danh sách users cho tất cả
     io.emit('update-users', onlineUsers);
     
-    // Thông báo có người mới join
     socket.broadcast.emit('user-joined', username);
   });
 
-  // Khi gửi tin nhắn
   socket.on('send-message', (data) => {
     io.emit('receive-message', {
       username: data.username,
@@ -45,7 +40,7 @@ io.on('connection', (socket) => {
     });
   });
 
-  // Khi user disconnect
+  // when user disconnect
   socket.on('disconnect', () => {
     onlineUsers = onlineUsers.filter(user => user.id !== socket.id);
     io.emit('update-users', onlineUsers);
@@ -56,4 +51,5 @@ io.on('connection', (socket) => {
 const PORT = 3000;
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+
 });
