@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp_Taamdev</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div id="loginContainer" class="container">
+        <div class="login-box">
+            <h2>Name: </h2>
+            <input type="text" id="usernameInput" placeholder="Tên của bạn...">
+            <button onclick="login()">Join Chat</button>
+        </div>
+    </div>
+
+    <div id="chatContainer" class="container" style="display: none;">
+        <div class="chat-wrapper">
+            <div class="sidebar">
+                <h3>Online Users</h3>
+                <ul id="usersList"></ul>
+            </div>
+
+            <div class="chat-area">
+                <div id="messagesContainer">
+                    <div class="welcome-msg">Welcome to Chat App!</div>
+                </div>
+
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="Nhập tin nhắn...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
